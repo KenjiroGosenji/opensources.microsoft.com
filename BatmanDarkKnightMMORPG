@@ -1,0 +1,60 @@
+// Batman Dark Knight MMORPG
+
+using System;
+
+public class Player
+{
+    public string Name { get; set; }
+    public int Level { get; set; }
+    public int Health { get; set; }
+    public int Attack { get; set; }
+    public int Defense { get; set; }
+
+    public Player(string name, int level, int health, int attack, int defense)
+    {
+        Name = name;
+        Level = level;
+        Health = health;
+        Attack = attack;
+        Defense = defense;
+    }
+
+    public void AttackEnemy(Player enemy)
+    {
+        int damage = Attack - enemy.Defense;
+        if(damage < 0)
+        {
+            damage = 0; // make sure damage is not negative
+        }
+        
+        enemy.Health -= damage;
+    }
+
+    public void PrintPlayerInfo()
+    {
+        Console.WriteLine("Name: " + Name);
+        Console.WriteLine("Level: " + Level);
+        Console.WriteLine("Health: " + Health);
+        Console.WriteLine("Attack: " + Attack);
+        Console.WriteLine("Defense: " + Defense);
+    }
+}
+
+public class Program
+{
+    public static void Main()
+    {
+        Player batman = new Player("Batman", 10, 100, 20, 15);
+        Player joker = new Player("Joker", 5, 50, 15, 10);
+
+        Console.WriteLine("Batman vs Joker:");
+        batman.PrintPlayerInfo();
+        joker.PrintPlayerInfo();
+        
+        batman.AttackEnemy(joker);
+        Console.WriteLine("Batman attacks Joker!");
+        
+        batman.PrintPlayerInfo();
+        joker.PrintPlayerInfo();
+    }
+}

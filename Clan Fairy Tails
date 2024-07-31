@@ -1,0 +1,90 @@
+using System;
+
+public class PlayerCharacter
+{
+    public string Name { get; set; }
+    public Race Race { get; set; }
+    public int Level { get; set; }
+    public bool IsHero { get; set; }
+   
+    public PlayerCharacter(string name, Race race, int level, bool isHero)
+    {
+        Name = name;
+        Race = race;
+        Level = level;
+        IsHero = isHero;
+    }
+}
+
+public enum Race
+{
+    Human,
+    Elf,
+    Dwarf,
+    Orc,
+    Dragonborn,
+    Tiefling,
+    Gnome,
+    Halfelf,
+    Halfling,
+    Aasimar,
+    HalfOrc
+}
+
+public class Program
+{
+    public static void Main()
+    {
+        PlayerCharacter player1 = new PlayerCharacter("Erza", Race.Human, 1, true);
+        PlayerCharacter player2 = new PlayerCharacter("Zeref", Race.Aasimar, 1, false);
+       
+        Console.WriteLine($"{player1.Name} is a {player1.Race} at level {player1.Level}. Is he a hero? {player1.IsHero}");
+        Console.WriteLine($"{player2.Name} is a {player2.Race} at level {player2.Level}. Is he a hero? {player2.IsHero}");
+    }
+}
+
+```
+
+This code defines a `PlayerCharacter` class with properties for name, race, level, and hero status. It also includes an enum for the different playable races in the game. In the `Main` method, two player characters are created and their details are displayed in the console. You can expand upon this code to include more game features like combat, quests, and leveling systems.
+
+Clan Fairy Tail dlc that deal with a long adventure in the depth of battle of all the clans of fairy tail that will last 3 business days.
+
+Here is a C# code snippet showcasing a Clan Fairy Tail DLC adventure that lasts for 3 business days:
+
+```csharp
+using System;
+
+public class FairyTailClanDLC
+{
+    public static void Main()
+    {
+        // Start the DLC adventure
+        Console.WriteLine("Welcome to the Clan Fairy Tail DLC adventure!");
+
+        // Simulate the 3-day adventure
+        for (int day = 1; day <= 3; day++)
+        {
+            Console.WriteLine($"Day {day} of the adventure:");
+
+            // Battle against other Fairy Tail clan members
+            foreach (var opponent in GetOpponentClans())
+            {
+                Console.WriteLine($"Preparing to battle against clan {opponent}...");
+
+                // Code for battle logic goes here
+
+                Console.WriteLine($"Victory against clan {opponent}!");
+            }
+
+            Console.WriteLine();
+        }
+
+        Console.WriteLine("Congratulations on completing the Clan Fairy Tail DLC adventure!");
+    }
+
+    public static string[] GetOpponentClans()
+    {
+        // Simulating different clans of Fairy Tail
+        return new string[] { "Sabertooth", "Lamia Scale", "Blue Pegasus", "Mermaid Heel" };
+    }
+}

@@ -1,0 +1,36 @@
+using System;
+using System.Data.SqlClient;
+
+class Program
+{
+    static void Main()
+    {
+        string connectionString = "YourConnectionString"; // specify your connection string here
+
+        // Create and open a connection
+        using (SqlConnection connection = new SqlConnection(connectionString))
+        {
+            connection.Open();
+
+            // Specify the SQL query to update the product information
+            string query = "UPDATE Products SET ProductName = 'RIGS 800 Updated', Price = 1499.99 WHERE ProductId = 800";
+
+            // Create a command object with the SQL query and connection
+            using (SqlCommand command = new SqlCommand(query, connection))
+            {
+                // Execute the SQL command
+                int rowsAffected = command.ExecuteNonQuery();
+
+                // Check if any rows were affected by the update
+                if (rowsAffected > 0)
+                {
+                    Console.WriteLine("Product information updated successfully.");
+                }
+                else
+                {
+                    Console.WriteLine("Product information update failed.");
+                }
+            }
+        }
+    }
+}

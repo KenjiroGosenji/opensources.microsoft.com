@@ -1,0 +1,114 @@
+using System;
+using System.Collections.Generic;
+
+public class CarDealership
+{
+    private List<Car> carsAvailable;
+
+    public CarDealership()
+    {
+        carsAvailable = new List<Car>();
+    }
+
+    public void AddCar(Car car)
+    {
+        carsAvailable.Add(car);
+    }
+
+    public void SellCar(Car car, Player player)
+    {
+        player.AddCarToGarage(car);
+        player.UpdateMoney(-car.Price);
+    }
+
+    public List<Car> GetAvailableCars()
+    {
+        return carsAvailable;
+    }
+}
+
+public class Car
+{
+    public string Model { get; set; }
+    public decimal Price { get; set; }
+    public bool IsElectric { get; set; }
+    public bool IsHybrid { get; set; }
+
+    public Car(string model, decimal price, bool isElectric, bool isHybrid)
+    {
+        Model = model;
+        Price = price;
+        IsElectric = isElectric;
+        IsHybrid = isHybrid;
+    }
+}
+
+public class Player
+{
+    public string Username { get; set; }
+    public decimal Money { get; set; }
+    public List<Car> Garage { get; set; }
+
+    public Player(string username)
+    {
+        Username = username;
+        Money = 100000;
+        Garage = new List<Car>();
+    }
+
+    public void AddCarToGarage(Car car)
+    {
+        Garage.Add(car);
+    }
+
+    public void UpdateMoney(decimal amount)
+    {
+        Money += amount;
+    }
+}
+
+public class NeedForSpeedStreetsUndrifted
+{
+    public static void Main()
+    {
+        CarDealership dealership = new CarDealership();
+        dealership.AddCar(new Car("Toyota Supra", 50000, false, false));
+        dealership.AddCar(new Car("Porsche 911", 100000, false, false));
+        dealership.AddCar(new Car("Tesla Model S", 80000, true, false));
+       
+        Player player = new Player("Player1");
+
+        Console.WriteLine("Welcome to Need for Speed Streets Undrifted!");
+        Console.WriteLine("Available cars at the dealership:");
+
+        foreach (Car car in dealership.GetAvailableCars())
+        {
+            Console.WriteLine(car.Model + " - $" + car.Price);
+        }
+
+        while (true)
+        {
+            Console.WriteLine("Current Money: $" + player.Money);
+            Console.WriteLine("Choose a car to buy or type 'exit' to leave:");
+
+            string choice = Console.ReadLine();
+
+            if (choice == "exit")
+            {
+                break;
+            }
+
+            foreach (Car car in dealership.GetAvailableCars())
+            {
+                if (car.Model.ToLower() == choice.ToLower())
+                {
+                    dealership.SellCar(car, player);
+                    Console.WriteLine("Congratulations! You bought a " + car.Model);
+                    break;
+                }
+            }
+        }
+
+        Console.WriteLine("Thank you for playing!");
+    }
+}

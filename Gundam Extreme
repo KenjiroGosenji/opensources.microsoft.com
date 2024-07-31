@@ -1,0 +1,28 @@
+using System;
+
+public class GundamMMORPG
+{
+    public static void Main()
+    {
+        Console.WriteLine("Welcome to Gundam Extreme - An action MMORPG!");
+        Console.WriteLine("Choose your hero or villain from one of eleven playable races:");
+
+        string[] races = { "Earth Federation", "Zeon", "Gundam Pilots", "Innovators", "Celestial Being", "Neo Zeon", "Iron Blooded Orphans", "Seed", "AGE", "Tekkadan", "Titans" };
+
+        foreach (string race in races)
+        {
+            Console.WriteLine(race);
+        }
+
+        string selectedRace = Console.ReadLine();
+
+        Console.WriteLine("Begin your story as a " + selectedRace + " and embark on your journey to save the world or conquer it!");
+
+        // Implement unique leveling and saga system here
+
+        // Implement gameplay mechanics for actions, battles, quests, etc.
+
+        // Your MMORPG code goes here
+
+    }
+}

@@ -1,0 +1,89 @@
+public class Player
+{
+    public int Health { get; set; }
+    public int AttackPower { get; set; }
+    public int Defense { get; set; }
+
+    public Player(int health, int attackPower, int defense)
+    {
+        Health = health;
+        AttackPower = attackPower;
+        Defense = defense;
+    }
+
+    // Add methods for player actions, such as attacking, using items, etc.
+}
+public class Enemy
+{
+    public int Health { get; set; }
+    public int AttackPower { get; set; }
+    public int Defense { get; set; }
+
+    public Enemy(int health, int attackPower, int defense)
+    {
+        Health = health;
+        AttackPower = attackPower;
+        Defense = defense;
+    }
+
+    // Add methods for enemy actions, such as attacking, using special abilities, etc.
+}
+public class Game
+{
+    private Player player;
+    private Enemy enemy;
+
+    public Game()
+    {
+        player = new Player(100, 10, 5);
+        enemy = new Enemy(50, 5, 2);
+    }
+
+    // Add methods for game actions, such as starting a new game, handling combat, ending the game, etc.
+}
+using System;
+
+class Program
+{
+    static void Main()
+    {
+        // Display welcome message
+        Console.WriteLine("Welcome to Angel May Cry!");
+
+        // Initialize player health and score
+        int playerHealth = 100;
+        int playerScore = 0;
+
+        // Game loop
+        while (playerHealth > 0)
+        {
+            // Display player status
+            Console.WriteLine("Health: " + playerHealth);
+            Console.WriteLine("Score: " + playerScore);
+
+            // Simulate a game event
+            Random rnd = new Random();
+            int attackPower = rnd.Next(10, 20);
+            playerHealth -= attackPower;
+            playerScore += attackPower * 2;
+
+            // Check if player is still alive
+            if (playerHealth <= 0)
+            {
+                Console.WriteLine("Game over! Your final score is: " + playerScore);
+            }
+            else
+            {
+                // Ask player if they want to continue playing
+                Console.WriteLine("Do you want to continue playing? (yes/no)");
+                string input = Console.ReadLine();
+
+                if (input.ToLower() != "yes")
+                {
+                    Console.WriteLine("Thanks for playing! Your final score is: " + playerScore);
+                    break;
+                }
+            }
+        }
+    }
+}

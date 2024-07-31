@@ -1,0 +1,21 @@
+#include <iostream>
+
+int main() {
+    bool isRunning = true;
+
+    while (isRunning) {
+        // Input handling
+        // Update game state
+        // Render graphics
+        std::cout << "Running game loop..." << std::endl;
+
+        // Check for game over conditions
+        if (/* game over condition */) {
+            isRunning = false;
+        }
+    }
+
+    std::cout << "Game over!" << std::endl;
+
+    return 0;
+}

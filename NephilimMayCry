@@ -1,0 +1,80 @@
+using System;
+
+// Define base class for characters
+public class Character
+{
+    public string name;
+    public int health;
+    public int attackPower;
+}
+
+// Define player character class
+public class PlayerCharacter : Character
+{
+    public int magicPower;
+
+    public void Attack(Enemy enemy)
+    {
+        // Perform attack logic here
+    }
+
+    public void UseAbility()
+    {
+        // Perform ability logic here
+    }
+}
+
+// Define enemy character class
+public class Enemy : Character
+{
+    public void Attack(PlayerCharacter player)
+    {
+        // Perform attack logic here
+    }
+}
+
+// Define game level class
+public class GameLevel
+{
+    public int levelNumber;
+    public List<Enemy> enemies;
+    public PlayerCharacter playerCharacter;
+
+    public void StartLevel()
+    {
+        // Initialize level with enemies and player character
+    }
+
+    public void CompleteLevel()
+    {
+        // Logic for completing level
+    }
+
+    public void EndLevel()
+    {
+        // Logic for ending level (e.g. player character dies)
+    }
+}
+
+// Main class to run the game
+public class NephilimMayCryGame
+{
+    public static void Main()
+    {
+        // Initialize game objects
+        PlayerCharacter player = new PlayerCharacter();
+        Enemy enemy1 = new Enemy();
+        Enemy enemy2 = new Enemy();
+        GameLevel level = new GameLevel();
+
+        // Set up game level
+        level.levelNumber = 1;
+        level.enemies.Add(enemy1);
+        level.enemies.Add(enemy2);
+        level.playerCharacter = player;
+
+        // Start and play the game
+        level.StartLevel();
+        // Continue game logic here
+    }
+}

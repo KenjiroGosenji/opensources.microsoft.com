@@ -1,0 +1,35 @@
+using System;
+
+public class Player
+{
+    public string Name { get; set; }
+    public int Level { get; set; }
+    public int Health { get; set; }
+    public int Mana { get; set; }
+
+    public Player(string name, int level)
+    {
+        Name = name;
+        Level = level;
+        Health = 100;
+        Mana = 50;
+    }
+
+    public void Move(int x, int y)
+    {
+        Console.WriteLine($"{Name} moves to ({x}, {y})");
+    }
+
+    public void Attack(Player target)
+    {
+        int damage = level * 10;
+        target.Health -= damage;
+        Console.WriteLine($"{Name} attacks {target.Name} for {damage} damage");
+    }
+
+    public void UsePotion(int amount)
+    {
+        Health += amount;
+        Console.WriteLine($"{Name} uses a potion and gains {amount} health");
+    }
+}

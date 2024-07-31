@@ -1,0 +1,63 @@
+using System;
+
+namespace RobotechBattleAlliancesXD
+{
+    public enum PlayableRace
+    {
+        Human,
+        Zentraedi,
+        Meltrandi,
+        Invid
+    }
+
+    public class Character
+    {
+        public string Name { get; set; }
+        public PlayableRace Race { get; set; }
+        public int Level { get; set; }
+        public bool IsHero { get; set; }
+
+        public Character(string name, PlayableRace race, bool isHero)
+        {
+            Name = name;
+            Race = race;
+            Level = 1;
+            IsHero = isHero;
+        }
+
+        public void LevelUp()
+        {
+            Level++;
+            Console.WriteLine($"{Name} has leveled up to level {Level}!");
+        }
+
+        public void BeginSaga()
+        {
+            Console.WriteLine($"{Name} begins their epic saga in the world of Robotech Battle Alliances XD.");
+        }
+    }
+
+    public class Program
+    {
+        public static void Main(string[] args)
+        {
+            // Create a new hero character
+            Character hero = new Character("Rick Hunter", PlayableRace.Human, true);
+
+            // Start the hero's saga
+            hero.BeginSaga();
+
+            // Level up the hero
+            hero.LevelUp();
+
+            // Create a new villain character
+            Character villain = new Character("Khyron", PlayableRace.Zentraedi, false);
+
+            // Start the villain's saga
+            villain.BeginSaga();
+
+            // Level up the villain
+            villain.LevelUp();
+        }
+    }
+}

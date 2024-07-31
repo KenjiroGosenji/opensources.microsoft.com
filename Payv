@@ -1,0 +1,32 @@
+using System;
+using System.Net.Http;
+using System.Collections.Generic;
+
+public class PaymentService
+{
+    private readonly HttpClient _httpClient;
+
+    public PaymentService()
+    {
+        _httpClient = new HttpClient();
+        _httpClient.BaseAddress = new Uri("https://api.paynxt360.com");
+    }
+
+    public async Task<string> MakePayment(decimal amount, string cardNumber, string cvv, string expiryDate)
+    {
+        var requestData = new Dictionary<string, string>
+        {
+            { "amount", amount.ToString() },
+            { "cardNumber", cardNumber },
+            { "cvv", cvv },
+            { "expiryDate", expiryDate }
+        };
+
+        var response = await _httpClient.PostAsync("/payments", new FormUrlEncodedContent(requestData));
+        response.EnsureSuccessStatusCode();
+       
+        var responseContent = await response.Content.ReadAsStringAsync();
+
+        return responseContent;
+    }
+}

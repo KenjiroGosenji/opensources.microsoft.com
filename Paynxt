@@ -1,0 +1,39 @@
+using System;
+using System.Net.Http;
+using System.Text;
+using System.Threading.Tasks;
+
+class Program
+{
+    static async Task Main(string[] args)
+    {
+        var paymentAmount = 50.00m;
+        var apiKey = "YOUR_API_KEY_HERE";
+       
+        var client = new HttpClient();
+       
+        var paymentData = new
+        {
+            amount = paymentAmount,
+            currency = "USD",
+            description = "Payment for Product XYZ"
+        };
+       
+        var paymentDataJson = Newtonsoft.Json.JsonConvert.SerializeObject(paymentData);
+       
+        var content = new StringContent(paymentDataJson, Encoding.UTF8, "application/json");
+       
+        client.DefaultRequestHeaders.Add("Authorization", $"Bearer {apiKey}");
+       
+        var response = await client.PostAsync("https://api.payv.com/payments/create", content);
+       
+        if (response.IsSuccessStatusCode)
+        {
+            var responseBody = await response.Content.ReadAsStringAsync();
+            Console.WriteLine("Payment processed successfully. Response: " + responseBody);
+        }
+        else
+        {
+            Console.WriteLine("Failed to process payment. Status code: " + response.StatusCode);
+        }
+    }

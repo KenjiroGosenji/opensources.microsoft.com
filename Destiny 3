@@ -1,0 +1,88 @@
+using System;
+
+public class Player
+{
+    private string name;
+    private int level;
+    private string classType;
+
+    public Player(string name, string classType)
+    {
+        this.name = name;
+        this.classType = classType;
+        this.level = 1;
+    }
+
+    public void LevelUp()
+    {
+        this.level++;
+    }
+
+    public void Attack()
+    {
+        Console.WriteLine($"{this.name} attacks the enemy!");
+    }
+}
+
+public class Game
+{
+    private Player[] players;
+
+    public Game()
+    {
+        this.players = new Player[4];
+    }
+
+    public void StartGame()
+    {
+        Console.WriteLine("Welcome to Destiny 3!");
+        Console.WriteLine("Choose your team of 4 players:");
+        Console.WriteLine("1. Titan (Male)");
+        Console.WriteLine("2. Hunter (Male)");
+        Console.WriteLine("3. Warlock (Male)");
+        Console.WriteLine("4. Witch (Female)");
+        Console.WriteLine("5. Wizard (Male)");
+
+        for (int i = 0; i < 4; i++)
+        {
+            Console.WriteLine($"Enter player {i + 1} name:");
+            string playerName = Console.ReadLine();
+            Console.WriteLine($"Choose class type (1-5):");
+            int classType = int.Parse(Console.ReadLine());
+
+            switch (classType)
+            {
+                case 1:
+                    players[i] = new Player(playerName, "Titan");
+                    break;
+                case 2:
+                    players[i] = new Player(playerName, "Hunter");
+                    break;
+                case 3:
+                    players[i] = new Player(playerName, "Warlock");
+                    break;
+                case 4:
+                    players[i] = new Player(playerName, "Witch");
+                    break;
+                case 5:
+                    players[i] = new Player(playerName, "Wizard");
+                    break;
+                default:
+                    Console.WriteLine("Invalid class type. Please choose again.");
+                    i--;
+                    break;
+            }
+        }
+
+        Console.WriteLine("Game started! Good luck on your mission!");
+    }
+}
+
+public class Program
+{
+    public static void Main()
+    {
+        Game game = new Game();
+        game.StartGame();
+    }
+}

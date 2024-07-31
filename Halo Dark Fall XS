@@ -1,0 +1,40 @@
+using System;
+
+public class Game
+{
+    public string Title { get; set; }
+    public int Level { get; set; }
+
+    public Game(string title, int level)
+    {
+        Title = title;
+        Level = level;
+    }
+
+    public void StartGame()
+    {
+        Console.WriteLine("Welcome to " + Title + "! Let's begin Level " + Level + ".");
+    }
+
+    public void PlayLevel()
+    {
+        Console.WriteLine("Playing Level " + Level + "...");
+        // Code for playing the level goes here
+    }
+
+    public void EndGame()
+    {
+        Console.WriteLine("Congratulations! You have completed " + Title + ".");
+    }
+}
+
+public class Program
+{
+    public static void Main(string[] args)
+    {
+        Game haloDarkFall = new Game("Halo Dark Fall", 1);
+        haloDarkFall.StartGame();
+        haloDarkFall.PlayLevel();
+        haloDarkFall.EndGame();
+    }
+}

@@ -1,0 +1,58 @@
+using System;
+
+public class Player
+{
+    public string Name { get; set; }
+    public int Level { get; set; }
+    public Race PlayerRace { get; set; }
+
+    public Player(string name, int level, Race playerRace)
+    {
+        Name = name;
+        Level = level;
+        PlayerRace = playerRace;
+    }
+
+    public void BeginStory()
+    {
+        Console.WriteLine($"Welcome, {Name}, to Clan Dragon Ball Extreme!");
+        Console.WriteLine($"You have chosen to play as a {PlayerRace}.");
+        Console.WriteLine("Are you ready to begin your adventure?");
+    }
+
+    public void SaveTheWorld()
+    {
+        Console.WriteLine("Can you reach the heights required to save the world?");
+    }
+
+    public void BeSaved()
+    {
+        Console.WriteLine("Or will you be the one the world needs saving from?");
+    }
+}
+
+public enum Race
+{
+    Saiyan,
+    Namekian,
+    Human,
+    FriezaRace,
+    Majin,
+    Android,
+    HybridSaiyan,
+    Hera,
+    Yardrat,
+    Tuffle,
+    Demon
+}
+
+public class Program
+{
+    public static void Main()
+    {
+        Player player1 = new Player("Goku", 1, Race.Saiyan);
+        player1.BeginStory();
+        player1.SaveTheWorld();
+        player1.BeSaved();
+    }
+}

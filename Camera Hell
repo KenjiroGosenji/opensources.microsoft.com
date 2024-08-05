@@ -1,0 +1,147 @@
+// Define the CameraHelper class
+class CameraHelper {
+
+    // Function to take a picture with the camera
+    fun takePicture() {
+        // Open the camera and take a picture
+        println("Opening camera...")
+        println("Taking a picture...")
+        println("Picture taken successfully!")
+    }
+
+    // Function to record a video with the camera
+    fun recordVideo() {
+        // Open the camera and start recording
+        println("Opening camera...")
+        println("Recording video...")
+        println("Video recorded successfully!")
+    }
+
+    // Function to switch to the front camera
+    fun switchToFrontCamera() {
+        println("Switching to front camera...")
+        println("Front camera activated!")
+    }
+
+    // Function to switch to the back camera
+    fun switchToBackCamera() {
+        println("Switching to back camera...")
+        println("Back camera activated!")
+    }
+}
+
+// Create an instance of the CameraHelper class
+val cameraHelper = CameraHelper()
+
+// Take a picture with the camera
+cameraHelper.takePicture()
+
+// Record a video with the camera
+cameraHelper.recordVideo()
+
+// Switch to the front camera
+cameraHelper.switchToFrontCamera()
+
+// Switch to the back camera
+cameraHelper.switchToBackCamera()
+
+public class CameraHell {
+    
+    private boolean isWorking;
+
+    public CameraHell() {
+        this.isWorking = true;
+    }
+
+    public void takePhoto() {
+        if (isWorking) {
+            System.out.println("Photo taken successfully!");
+        } else {
+            System.out.println("Camera is not working. Unable to take photo.");
+        }
+    }
+
+    public void repairCamera() {
+        System.out.println("Camera is being repaired...");
+        isWorking = true;
+        System.out.println("Camera has been repaired.");
+    }
+
+    public void breakCamera() {
+        System.out.println("Camera is being broken...");
+        isWorking = false;
+        System.out.println("Camera has been broken.");
+    }
+
+    public static void main(String[] args) {
+        CameraHell camera = new CameraHell();
+        
+        camera.takePhoto();
+        camera.breakCamera();
+        camera.takePhoto();
+        camera.repairCamera();
+        camera.takePhoto();
+    }
+}
+
+
+
+
+
+// Assuming we have a Camera class with properties for position and rotation
+
+public class Camera
+{
+    public Vector3 Position { get; set; }
+    public Vector3 Rotation { get; set; }
+
+    public Camera(Vector3 position, Vector3 rotation)
+    {
+        Position = position;
+        Rotation = rotation;
+    }
+
+    public void Update()
+    {
+        // Update camera position and rotation based on user input or any other logic
+    }
+
+    // Other camera methods can be added here as needed
+}
+
+// Assuming we have a CameraController class that controls the camera
+
+public class CameraController
+{
+    private Camera camera;
+
+    public CameraController(Camera camera)
+    {
+        this.camera = camera;
+    }
+
+    public void Update()
+    {
+        camera.Update();
+    }
+
+    // Other camera controller methods can be added here as needed
+}
+
+// In the main program or game loop, create an instance of the Camera class and CameraController class
+
+Camera camera = new Camera(new Vector3(0, 0, 0), new Vector3(0, 0, 0));
+CameraController cameraController = new CameraController(camera);
+
+// In the game loop, update the camera controller
+
+while (true)
+{
+    // Update other game logic
+
+    cameraController.Update();
+
+    // Render the scene with the camera
+}
+
+// This is just a basic structure for a camera system in a game. More functionality and features can be added as needed.

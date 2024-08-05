@@ -1,0 +1,208 @@
+using System;
+using System.Collections.Generic;
+
+class Camera
+{
+    public string Model { get; set; }
+    public string Brand { get; set; }
+    public double Price { get; set; }
+
+    public override string ToString()
+    {
+        return $"Model: {Model}, Brand: {Brand}, Price: ${Price}";
+    }
+}
+
+class CameraStore
+{
+    private List<Camera> cameras;
+
+    public CameraStore()
+    {
+        cameras = new List<Camera>
+        {
+            new Camera { Model = "EOS Rebel T6", Brand = "Canon", Price = 399.99 },
+            new Camera { Model = "D3500", Brand = "Nikon", Price = 499.99 },
+            new Camera { Model = "Alpha a6000", Brand = "Sony", Price = 649.99 }
+        };
+    }
+
+    public void DisplayCameras()
+    {
+        foreach (Camera camera in cameras)
+        {
+            Console.WriteLine(camera);
+        }
+    }
+
+    public void AddToCart(Camera camera)
+    {
+        // Add the selected camera to the shopping cart
+        Console.WriteLine($"Added {camera.Model} to your shopping cart.");
+    }
+}
+
+class Program
+{
+    static void Main()
+    {
+        CameraStore cameraStore = new CameraStore();
+
+        // Display available cameras
+        Console.WriteLine("Welcome to Camera Heaven! Available cameras:");
+        cameraStore.DisplayCameras();
+
+        // Prompt the user to select a camera
+        Console.Write("Enter the model of the camera you would like to purchase: ");
+        string selectedModel = Console.ReadLine();
+
+        // Find the selected camera
+        Camera selectedCamera = cameraStore.cameras.Find(camera => camera.Model == selectedModel);
+
+        if (selectedCamera != null)
+        {
+            cameraStore.AddToCart(selectedCamera);
+        }
+        else
+        {
+            Console.WriteLine("Camera not found. Please try again.");
+        }
+    }
+}
+public class Camera
+{
+    public string Brand { get; set; }
+    public string Model { get; set; }
+    public int Megapixels { get; set; }
+    public double Price { get; set; }
+
+    // Constructor
+    public Camera(string brand, string model, int megapixels, double price)
+    {
+        Brand = brand;
+        Model = model;
+        Megapixels = megapixels;
+        Price = price;
+    }
+
+    // Method to show camera details
+    public void ShowDetails()
+    {
+        Console.WriteLine("Brand: " + Brand);
+        Console.WriteLine("Model: " + Model);
+        Console.WriteLine("Megapixels: " + Megapixels);
+        Console.WriteLine("Price: $" + Price);
+    }
+}
+
+// Main class for Camera Heaven
+class CameraHeaven
+{
+    static void Main()
+    {
+        // Create a new Camera object
+        Camera camera1 = new Camera("Canon", "EOS Rebel T7", 24, 699.99);
+
+        // Display the camera details
+        camera1.ShowDetails();
+    }
+}
+
+
+public class CameraHeaven {
+    
+    private String brand;
+    private int resolution;
+    private double price;
+
+    public CameraHeaven(String brand, int resolution, double price) {
+        this.brand = brand;
+        this.resolution = resolution;
+        this.price = price;
+    }
+
+    public String getBrand() {
+        return brand;
+    }
+
+    public void setBrand(String brand) {
+        this.brand = brand;
+    }
+
+    public int getResolution() {
+        return resolution;
+    }
+
+    public void setResolution(int resolution) {
+        this.resolution = resolution;
+    }
+
+    public double getPrice() {
+        return price;
+    }
+
+    public void setPrice(double price) {
+        this.price = price;
+    }
+
+    public void displayCameraDetails() {
+        System.out.println("Brand: " + brand);
+        System.out.println("Resolution: " + resolution);
+        System.out.println("Price: $" + price);
+    }
+
+    public static void main(String[] args) {
+        CameraHeaven camera1 = new CameraHeaven("Canon", 20, 500.00);
+        CameraHeaven camera2 = new CameraHeaven("Nikon", 24, 700.00);
+
+        camera1.displayCameraDetails();
+        camera2.displayCameraDetails();
+    }
+}
+
+class CameraHeaven {
+    private var cameraList: MutableList<Camera> = mutableListOf()
+
+    fun addCamera(camera: Camera) {
+        cameraList.add(camera)
+    }
+
+    fun removeCamera(camera: Camera) {
+        cameraList.remove(camera)
+    }
+
+    fun listCameras() {
+        if (cameraList.isEmpty()) {
+            println("No cameras available in Camera Heaven")
+        } else {
+            println("Cameras available in Camera Heaven:")
+            for (camera in cameraList) {
+                println(camera)
+            }
+        }
+    }
+}
+
+class Camera(val brand: String, val model: String, val megapixels: Int) {
+    override fun toString(): String {
+        return "$brand $model - $megapixels MP"
+    }
+}
+
+fun main() {
+    val cameraHeaven = CameraHeaven()
+
+    val camera1 = Camera("Canon", "EOS Rebel T6", 18)
+    val camera2 = Camera("Nikon", "D3500", 24)
+    val camera3 = Camera("Sony", "Alpha A6000", 24)
+
+    cameraHeaven.addCamera(camera1)
+    cameraHeaven.addCamera(camera2)
+    cameraHeaven.addCamera(camera3)
+
+    cameraHeaven.listCameras()
+
+    cameraHeaven.removeCamera(camera2)
+
+    cameraHeaven.listCameras()
+}

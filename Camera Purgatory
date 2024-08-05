@@ -1,0 +1,191 @@
+using UnityEngine;
+
+public class CameraPurgatory : MonoBehaviour
+{
+    public Transform target;
+    public float smoothing = 5f;
+
+    private Vector3 offset;
+
+    private void Start()
+    {
+        offset = transform.position - target.position;
+    }
+
+    private void Update()
+    {
+        Vector3 targetCamPos = target.position + offset;
+        transform.position = Vector3.Lerp(transform.position, targetCamPos, smoothing * Time.deltaTime);
+    }
+}
+void Update()
+{
+    camera.Update();
+}
+public class Camera
+{
+    private Transform target;
+    private Vector3 offset;
+
+    public Camera(Transform target)
+    {
+        this.target = target;
+        offset = transform.position - target.position;
+    }
+
+    public void Update()
+    {
+        transform.position = target.position + offset;
+        transform.LookAt(target);
+    }
+
+    public void Move(Vector3 direction)
+    {
+        transform.Translate(direction * Time.deltaTime);
+    }
+
+    public void Rotate(Vector3 rotation)
+    {
+        transform.Rotate(rotation * Time.deltaTime);
+    }
+}
+public class Camera
+{
+    //...
+
+    public void Update()
+    {
+        transform.position = target.position + offset;
+        transform.LookAt(target);
+
+        RaycastHit hit;
+        if (Physics.Linecast(target.position, transform.position, out hit))
+        {
+            transform.position = hit.point;
+        }
+    }
+}
+public class CameraPurgatory {
+    private boolean isOn;
+    private int batteryLevel;
+
+    public CameraPurgatory() {
+        this.isOn = false;
+        this.batteryLevel = 100;
+    }
+
+    public void turnOn() {
+        if (!isOn && batteryLevel > 0) {
+            isOn = true;
+            System.out.println("Camera turned on");
+        } else {
+            System.out.println("Cannot turn on camera");
+        }
+    }
+
+    public void turnOff() {
+        if (isOn) {
+            isOn = false;
+            System.out.println("Camera turned off");
+        } else {
+            System.out.println("Camera is already off");
+        }
+    }
+
+    public void takePhoto() {
+        if (isOn && batteryLevel > 0) {
+            System.out.println("Photo taken");
+            batteryLevel -= 10;
+        } else {
+            System.out.println("Cannot take photo");
+        }
+    }
+
+    public void chargeBattery() {
+        if (batteryLevel < 100) {
+            batteryLevel = 100;
+            System.out.println("Battery charged");
+        } else {
+            System.out.println("Battery is already at full capacity");
+        }
+    }
+
+    public void checkBatteryLevel() {
+        System.out.println("Battery Level: " + batteryLevel);
+    }
+
+    public static void main(String[] args) {
+        CameraPurgatory camera = new CameraPurgatory();
+
+        camera.turnOn();
+        camera.takePhoto();
+        camera.checkBatteryLevel();
+        camera.chargeBattery();
+        camera.checkBatteryLevel();
+        camera.turnOff();
+    }
+}
+import android.Manifest
+import android.content.pm.PackageManager
+import android.os.Bundle
+import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
+import androidx.camera.core.CameraSelector
+import androidx.camera.core.Preview
+import androidx.camera.lifecycle.ProcessCameraProvider
+import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
+import com.google.common.util.concurrent.ListenableFuture
+import kotlinx.android.synthetic.main.activity_camera.*
+
+class CameraActivity : AppCompatActivity() {
+
+    private lateinit var cameraProviderFuture: ListenableFuture<ProcessCameraProvider>
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_camera)
+
+        cameraProviderFuture = ProcessCameraProvider.getInstance(this)
+
+        if (allPermissionsGranted()) {
+            startCamera()
+        } else {
+            ActivityCompat.requestPermissions(
+                this, REQUIRED_PERMISSIONS, REQUEST_CODE_PERMISSIONS
+            )
+        }
+    }
+
+    private fun allPermissionsGranted() = REQUIRED_PERMISSIONS.all {
+        ContextCompat.checkSelfPermission(
+            baseContext, it
+        ) == PackageManager.PERMISSION_GRANTED
+    } 
+
+    private fun startCamera() {
+        cameraProviderFuture.addListener({
+            val cameraProvider = cameraProviderFuture.get()
+            bindPreview(cameraProvider)
+        }, ContextCompat.getMainExecutor(this))
+    }
+
+    private fun bindPreview(cameraProvider: ProcessCameraProvider) {
+        val preview = Preview.Builder().build()
+
+        val cameraSelector = CameraSelector.Builder()
+            .requireLensFacing(CameraSelector.LENS_FACING_BACK)
+            .build()
+
+        preview.setSurfaceProvider(viewFinder.createSurfaceProvider())
+
+        cameraProvider.bindToLifecycle(
+            this, cameraSelector, preview
+        )
+    }
+
+    companion object {
+        private const val REQUEST_CODE_PERMISSIONS = 10
+        private val REQUIRED_PERMISSIONS = arrayOf(Manifest.permission.CAMERA)
+    }
+}
